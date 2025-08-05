@@ -1,0 +1,183 @@
+<app-nav></app-nav>
+<main class="main">
+  <div class="pt-40 pb-20 bg-[#e9eeee]">
+    <div class="container mx-auto py-8">
+      <div class="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
+        <div class="col-span-4 sm:col-span-3">
+          <div class="bg-white shadow rounded-lg p-6">
+            <div class="flex flex-col items-center">
+              <svg
+                class="size-34 rounded-full mb-4 shr text-gray-800"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              @if (userProfile) {
+              <h1 class="text-xl font-bold">{{ userProfile.username }}</h1>
+              <p class="text-gray-700">{{ userProfile.correo }}</p>
+              }
+            </div>
+            <hr class="my-6 border-t border-gray-300" />
+            <div class="flex flex-col">
+              <span
+                class="text-gray-700 uppercase font-bold tracking-wider mb-2"
+                >Información</span
+              >
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <p class="mt-2 text-sm">Nombres</p>
+                  <p class="mt-2 text-sm">Telefono</p>
+                  <p class="mt-2 text-sm">Miembro desde</p>
+                </div>
+                <div>
+                  @if (userProfile) {
+                  <p class="mt-2 text-sm">{{ userProfile.nombre }}</p>
+                  <p class="mt-2 text-sm">{{ userProfile.telefono }}</p>
+                  <p class="mt-2 text-sm">{{ userProfile.fechaCreacion}}</p>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-4 sm:col-span-9">
+          <div class="bg-white shadow rounded-lg p-8">
+            <section class="relative">
+              <div class="w-full max-w-7xl mx-auto px-4 md:px-8">
+                <h2 class="font-manrope font-semibold text-2xl text-black mb-9">
+                  Historial de Compras
+                </h2>
+                @if(pedidos != []){ @for (pedido of pedidos; track $index) {
+                <div class="border border-gray-300">
+                  <div
+                    class="flex max-md:flex-col border-b border-gray-300 items-center justify-between py-4 px-3 md:px-6"
+                  >
+                    <div class="data">
+                      <p
+                        class="font-medium text-md text-black whitespace-nowrap"
+                      >
+                        Compra : #{{ pedido.idPedido }}
+                      </p>
+                      <p
+                        class="font-medium text-md text-black whitespace-nowrap"
+                      >
+                        Fecha de compra : {{ pedido.fechaPedido }}
+                      </p>
+                    </div>
+                  </div>
+                  @for (producto of pedido.detallePedido; track $index) {
+                  <div
+                    class="flex max-lg:flex-col items-center lg:gap-24 border-y border-gray-300 py-4 px-3 md:px-6"
+                  >
+                    <div class="flex w-full">
+                      <img
+                        class="w-24 h-24 object-cover rounded-lg"
+                        [src]="producto.imagenUrl"
+                        [alt]="producto.nombre"
+                      />
+                      <div
+                        class="max-sm:mt-4 sm:pl-8 flex flex-col justify-center max-sm:items-center"
+                      >
+                        <h6
+                          class="font-semibold text-lg text-black whitespace-nowrap"
+                        >
+                          {{ producto.nombre }}
+                        </h6>
+                        <p class="my-2 text-md">
+                          {{ producto.descripcion }}
+                        </p>
+                        <div
+                          class="flex items-center max-sm:flex-col gap-x-10 gap-y-3"
+                        >
+                          <span
+                            class="font-normal text-md text-gray-500 whitespace-nowrap"
+                            >Cantidad: {{ producto.cantidad }}</span
+                          >
+                          <p
+                            class="font-semibold text-md text-black whitespace-nowrap"
+                          >
+                            Precio: S/ {{ producto.precioUnitario }}.00
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+                  <div
+                    class="flex items-center border-t border-gray-300 justify-between max-sm:flex-col-reverse"
+                  >
+                    <p class="font-medium p-4 text-md text-black max-sm:py-4">
+                      <span class="text-gray-500">Subtotal: </span> S/ {{ pedido.subtotal }}
+                    </p>
+                    <p class="font-medium p-4 text-md text-black max-sm:py-4">
+                      <span class="text-gray-500">Tipo de entrega: </span> {{ pedido.tipoEntrega }}
+                    </p>
+                  </div>
+                </div>
+                } } @else {
+                  <p class="text-gray-500">Aún no has realizado ninguna compra.</p>
+                }
+              </div>
+            </section>
+          </div>
+          <div class="bg-white shadow rounded-lg p-8 mt-4">
+            <section class="relative">
+              <div class="w-full max-w-7xl mx-auto px-4 md:px-8">
+                <h2 class="font-manrope font-semibold text-2xl text-black mb-9">
+                  Historial de Reservas
+                </h2>
+                @if(reservas != []){ @for (reserva of reservas; track $index) {
+                <div class="border border-gray-300">
+                  <div
+                    class="flex max-md:flex-col border-b border-gray-300 items-center justify-between py-4 px-3 md:px-6"
+                  >
+                    <div class="data">
+                      <p
+                        class="font-medium text-md text-black whitespace-nowrap"
+                      >
+                        Reserva : #{{$index+1}}
+                      </p>
+                      <p
+                        class="font-medium text-md text-black whitespace-nowrap"
+                      >
+                        Fecha de reserva : {{ reserva.fechaReserva }}
+                      </p>
+                      <p
+                        class="font-medium text-md text-black whitespace-nowrap"
+                      >
+                        Hora de reserva : {{ reserva.horaReserva }}
+                      </p>
+                      <p
+                        class="font-medium text-md text-black whitespace-nowrap"
+                      >
+                        personas : {{ reserva.personas }}
+                      </p>
+                      <p
+                        class="font-medium text-md text-black whitespace-nowrap"
+                      >
+                        estado : {{ reserva.estado }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                } } @else {
+                  <p class="text-gray-500">Aún no has realizado ninguna compra.</p>
+                }
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>

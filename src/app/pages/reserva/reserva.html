@@ -1,0 +1,218 @@
+<app-nav></app-nav>
+<app-header [msg]="text" [imageUrl]="image"></app-header>
+<main class="main bg-bgcolorff">
+  <!-- wizard form -->
+  <div class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="container mx-auto p-4">
+      <div class="bg-white rounded-lg shadow-lg p-6 md:p-10 max-w-3xl mx-auto">
+        <!-- Progress Bar -->
+        <div class="mb-8">
+          <div class="flex justify-between mb-2">
+            <span
+              class="text-lx font-semibold inline-block py-1 px-2 uppercase rounded-full text-amber-600 bg-amber-200"
+              id="step1"
+            >
+              Personas
+            </span>
+            <span
+              class="text-lx font-semibold inline-block py-1 px-2 uppercase rounded-full text-amber-600 bg-amber-200 opacity-50"
+              id="step2"
+            >
+              Fecha
+            </span>
+            <span
+              class="text-lx font-semibold inline-block py-1 px-2 uppercase rounded-full text-amber-600 bg-amber-200 opacity-50"
+              id="step3"
+            >
+              Sucursal
+            </span>
+          </div>
+          <div
+            class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-amber-200"
+          >
+            <div
+              id="progress-bar"
+              class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-amber-500 w-1/3 transition-all duration-500 ease-in-out"
+            ></div>
+          </div>
+        </div>
+
+        <!-- Form Steps -->
+        <form id="multi-step-form" [formGroup]="reservaForm" (submit)="HandleSubmit()">
+          <!-- Step 1: Personas -->
+          <div id="step-1" class="step">
+            <h2 class="text-3xl my-4">Elige la cantidad de personas</h2>
+            <hr />
+            <div class="mb-6 my-10">
+              <p class="clasificacion">
+                <label class="cursor-pointer mx-2">
+                  <input
+                    id="radio1"
+                    type="radio"
+                    name="personas"
+                    formControlName="personas"
+                    value="1"
+                    class="peer hidden"
+                    checked
+                  />
+                  <span
+                    class="text-2xl inline-block text-center size-10 font-semibold text-black border-2 border-black rounded-full hover:bg-gray-300 peer-checked:bg-gray-300"
+                  >
+                    1
+                  </span>
+                </label>
+                <label class="cursor-pointer mx-2">
+                  <input
+                    id="radio2"
+                    type="radio"
+                    name="personas"
+                    formControlName="personas"
+                    value="2"
+                    class="peer hidden"
+                  />
+                  <span
+                    class="text-2xl inline-block text-center size-10 font-semibold text-black border-2 border-black rounded-full hover:bg-gray-300 peer-checked:bg-gray-300"
+                  >
+                    2
+                  </span>
+                </label>
+                <label class="cursor-pointer mx-2">
+                  <input
+                    id="radio3"
+                    type="radio"
+                    name="personas"
+                    formControlName="personas"
+                    value="3"
+                    class="peer hidden"
+                  />
+                  <span
+                    class="text-2xl inline-block text-center size-10 font-semibold text-black border-2 border-black rounded-full hover:bg-gray-300 peer-checked:bg-gray-300"
+                  >
+                    3
+                  </span>
+                </label>
+                <label class="cursor-pointer mx-2">
+                  <input
+                    id="radio4"
+                    type="radio"
+                    name="personas"
+                    formControlName="personas"
+                    value="4"
+                    class="peer hidden"
+                  />
+                  <span
+                    class="text-2xl inline-block text-center size-10 font-semibold text-black border-2 border-black rounded-full hover:bg-gray-300 peer-checked:bg-gray-300"
+                  >
+                    4
+                  </span>
+                </label>
+                <label class="cursor-pointer mx-2">
+                  <input
+                    id="radio5"
+                    type="radio"
+                    name="personas"
+                    formControlName="personas"
+                    value="5"
+                    class="peer hidden"
+                  />
+                  <span
+                    class="text-2xl inline-block text-center size-10 font-semibold text-black border-2 border-black rounded-full hover:bg-gray-300 peer-checked:bg-gray-300"
+                  >
+                    5
+                  </span>
+                </label>
+                <label class="cursor-pointer mx-2">
+                  <input
+                    id="radio6"
+                    type="radio"
+                    name="personas"
+                    formControlName="personas"
+                    value="6"
+                    class="peer hidden"
+                  />
+                  <span
+                    class="text-2xl inline-block text-center size-10 font-semibold text-black border-2 border-black rounded-full hover:bg-gray-300 peer-checked:bg-gray-300"
+                  >
+                    6
+                  </span>
+                </label>
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2: Fecha -->
+          <div id="step-2" class="step hidden">
+            <h2 class="text-3xl my-4">Selecciona una fecha y hora</h2>
+            <hr />
+            <div class="mb-6 my-10 flex flex-col items-center">
+              <input
+                type="date"
+                id="fecha-reserva"
+                name="fechaReserva"
+                formControlName="fechaReserva"
+                class="bg-gray-50 hidden border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5"
+                required
+                #fecha
+              />
+              <input
+                type="time"
+                id="hora-reserva"
+                name="horaReserva"
+                formControlName="horaReserva"
+                class="bg-gray-50 mt-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5"
+                required
+                #hora
+              />
+            </div>
+          </div>
+
+          <!-- Step 3: Sucursal -->
+          <div id="step-3" class="step hidden">
+            <h2 class="text-3xl my-4">Selecciona una Sucursal</h2>
+            <hr />
+            <div class="mb-6 my-10 flex flex-col items-center">
+              <select
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                required
+                name="sucursal"
+                formControlName="sucursal"
+              >
+                <option selected value="Pueblo Libre">Pueblo Libre</option>
+                <option value="San Miguel">San Miguel</option>
+                <option value="Miraflores">Miraflores</option>
+                <option value="La Molina">La Molina</option>
+                <option value="San Isidro">San Isidro</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="flex justify-between mt-8">
+            <button
+              type="button"
+              id="prevBtn"
+              class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 hover:cursor-pointer focus:outline-none focus:shadow-outline hidden"
+            >
+              Regresar
+            </button>
+            <button
+              type="button"
+              id="nextBtn"
+              class="px-4 py-2 bg-amber-400 text-white rounded-lg hover:bg-amber-500  hover:cursor-pointer focus:outline-none focus:shadow-outline"
+            >
+              Siguiente
+            </button>
+            <button
+              type="submit"
+              id="submitBtn"
+              class="px-4 py-2 bg-amber-400 text-white rounded-lg hover:bg-amber-500 hover:cursor-pointer focus:outline-none focus:shadow-outline hidden"
+            >
+              Reservar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>

@@ -1,0 +1,47 @@
+<app-nav [downScroll]="downScroll"></app-nav>
+<app-header [imageUrl]="image" [msg]="text"></app-header>
+
+<!--contenedor "sabor peruano de herencia"-->
+<div
+  class="w-full min-h-[22em] flex justify-center items-center border-y-[8px] border-[peru]"
+  style="background: url(images-carta/fondo-saborperuano.jpg) center / cover"
+>
+  <h2 class="text-[whitesmoke] m-0 text-[calc(1.4vw+1.2em)] font-medium italic">
+    Sabor peruano de herencia
+  </h2>
+</div>
+<!-- nav -->
+<nav
+  class="w-full border-t-[5px] border-b-[5px] border-black bg-[whitesmoke] text-center sticky top-0"
+>
+  <ul class="flex justify-center my-[18px]">
+    <li class="mx-[0.6em]">
+      <button (click)="irA('Bebidas')"
+        class="text-black text-[calc(1.1vw+0.5em)] font-bold transition-colors duration-200 hover:text-[peru] hover:cursor-pointer"
+        >Bebidas</button
+      >
+    </li>
+    <li class="mx-[0.6em]">
+      <button (click)="irA('Entradas')"
+        class="text-black text-[calc(1.1vw+0.5em)] font-bold transition-colors duration-200 hover:text-[peru] hover:cursor-pointer"
+        >Entradas</button
+      >
+    </li>
+    <li class="mx-[0.6em]">
+      <button (click)="irA('Platos')"
+        class="text-black text-[calc(1.1vw+0.5em)] font-bold transition-colors duration-200 hover:text-[peru] hover:cursor-pointer"
+        >Platos de fondo</button
+      >
+    </li>
+    <li class="mx-[0.6em]">
+      <button (click)="irA('Postres')"
+        class="text-black text-[calc(1.1vw+0.5em)] font-bold transition-colors duration-200 hover:text-[peru] hover:cursor-pointer"
+        >Postres</button
+      >
+    </li>
+  </ul>
+</nav>
+<main class="main bg-white p-[0.1px]">
+  <app-card-article-carta></app-card-article-carta>
+</main>
+<app-footer></app-footer>

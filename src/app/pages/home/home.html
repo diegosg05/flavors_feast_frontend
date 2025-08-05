@@ -1,0 +1,99 @@
+<app-nav></app-nav>
+<app-header [imageUrl]="image" [msg]="text"></app-header>
+<main class="main">
+  <div class="main-header">
+    <!---contenedor de brindando-sonrisas-->
+    <div class="w-full bg-[#DDAB6E] border-t-5 border-b-5 border-amber-500">
+      <div
+        class="mt-5 w-1/2 h-[calc(2vw+2em)] border-r-2 border-r-lime-100"
+      ></div>
+
+      <h3
+        class="text-center text-[calc(1.2vw+1.0em)] tracking-[2px] italic font-medium text-black"
+      >
+        Brindando sonrisas con la sazón peruana
+      </h3>
+
+      <div
+        class="mb-5 w-1/2 h-[calc(2vw+2em)] border-r-2 border-r-lime-100"
+      ></div>
+    </div>
+
+    <!--contenedor presentacion-->
+    <div
+      class="w-full border-t-5 border-b-5 border-amber-500"
+      style="background: url(images-home/fondo-presentacion.jpg) center / cover"
+    >
+      <p
+        class="text-[calc(1.3vw+0.8em)] font-IndieFlower text-justify italic font-bold mt-[10%] mb-[10%] mr-[20%] ml-[20%] text-black"
+      >
+        Bienvenido a nuestra casa Flavors feast, adentro contamos con un gran
+        reino de sabores que represetan toda la maravillosa gastronomía peruana;
+        en cada plato de nuestra carta, cuenta con una pequeña historia; en cada
+        sabor, genera una sonrisa en nuestros comensales que quedan en nuestros
+        recuerdos. Sigamos juntos, creando más experiencias.
+      </p>
+    </div>
+  </div>
+
+  <!--section del main-->
+  <section class="bg-bgcolorff flex flex-col justify-center items-center">
+    <app-card-article-home
+      cardTitle="HORARIO DE ATENCIÓN"
+      imgUrl="images-home/horario.jpg"
+      imgAlt="Horario Flavors Feast"
+      articleClassName="flex flex-col items-center"
+    >
+      <p class="text-center text-[calc(1.0vw+0.1em)] text-black">En salón</p>
+      <p class="text-[calc(1.0vw+0.3em)] text-black">De Lunes a sábado</p>
+      <p class="text-[calc(1.0vw+0em)] text-black">01:00 p.m. a 8:30 p.m.</p>
+      <hr class="border-1 border-black w-1/2 " />
+      <p class="text-[calc(1.0vw+0em)] text-black">Domingo: 12:00 p.m. a 7:30 p.m.</p>
+      <a
+        type="button"
+        routerLink="/reserva"
+        class="focus:outline-none mt-5 text-white border-2 border-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 transition-[background-color] duration-200"
+      >
+        RESERVAR
+      </a>
+    </app-card-article-home>
+    <app-card-article-home
+      cardTitle="LA CARTA"
+      imgUrl="images-home/minicarta.jpg"
+      imgAlt="Carta Flavors Feast"
+      articleClassName="flex flex-col items-center"
+    >
+      <p class="text-justify text-[calc(1.0vw+0.1em)] text-black">
+        En nuestra carta queremos representar todo el arte de nuestra
+        gastronomía peruana, haciendo un recorrido por todos los platos de las
+        regiones del Perú, expandiendo también toda nuestra creatividad
+      </p>
+      <a
+        type="button"
+        routerLink="/carta"
+        class="focus:outline-none mt-5 text-white border-2 border-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 transition-[background-color] duration-200"
+      >
+        VER CARTA
+      </a>
+    </app-card-article-home>
+    <app-card-article-home
+      cardTitle="NUESTRA TIENDA"
+      imgUrl="images-home/entrada.jpg"
+      imgAlt="Tienda Flavors Feast"
+      articleClassName="flex flex-col items-center"
+    >
+      <p class="text-justify text-[calc(1.0vw+0.1em)] text-black">
+        Si deseas comprar unos de nuestros platos para llevar y disfrutar en
+        familia en casa, acá puedes encontrar variedad de opciones para elegir
+      </p>
+      <a
+        type="button"
+        routerLink="/tienda"
+        class="focus:outline-none mt-5 text-white border-2 border-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 transition-[background-color] duration-200"
+      >
+        VER TIENDA
+      </a>
+    </app-card-article-home>
+  </section>
+</main>
+<app-footer></app-footer>

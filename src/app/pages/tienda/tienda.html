@@ -1,0 +1,156 @@
+<app-nav></app-nav>
+<app-header [imageUrl]="image" [msg]="text"></app-header>
+<main class="main bg-[#e9eeee] p-[0.1px]">
+  <div class="w-[62%] mx-auto">
+    <div
+      class="flex justify-between items-center bg-[#363636] mt-[3em] p-[0.5em]"
+    >
+      <h2 class="text-white my-[0.4em] ml-[0.8em] text-2xl font-semibold">
+        TIENDA
+      </h2>
+      <div class="w-[2.5em] mr-[1em]">
+        <button
+          class="border-0 hover:cursor-pointer bg-transparent relative"
+          type="button"
+          data-drawer-target="drawer-navigation"
+          data-drawer-show="drawer-navigation"
+          aria-controls="drawer-navigation"
+        >
+          <img class="w-full" src="images/carshop.png" alt="Carshop" />
+          <span
+            id="contadorproductos"
+            class="py-[0.1em] px-[0.5em] text-[1.1em] absolute bottom-0 right-[-0.4em] text-white bg-red-600 rounded-[1em]"
+            >{{ totalProductosCart }}</span
+          >
+        </button>
+      </div>
+    </div>
+
+    <!-- drawer component -->
+    <div
+      id="drawer-navigation"
+      class="flex flex-col justify-between fixed top-0 left-0 z-40 w-100 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-[#faebd7]"
+      tabindex="-1"
+      aria-labelledby="drawer-navigation-label"
+    >
+      <div>
+        <h5
+          id="drawer-navigation-label"
+          class="text-2xl font-semibold text-gray-500 uppercase"
+        >
+          Tu Carrito
+        </h5>
+        <button
+          type="button"
+          data-drawer-hide="drawer-navigation"
+          aria-controls="drawer-navigation"
+          class="text-gray-400 bg-transparent hover:bg-[#ffffff70] rounded-2xl text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center"
+        >
+          <svg
+            aria-hidden="true"
+            class="size-8"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <span class="sr-only">Close menu</span>
+        </button>
+        <div class="py-4">
+          <ul class="space-y-2 font-medium">
+            @for (productoCart of productsCart; track $index) {
+            <li>
+              <div
+                class="flex flex-col items-center h-auto md:flex-row md:max-w-xl"
+              >
+                <img
+                  class="object-cover rounded-t-lg w-25"
+                  [src]="productoCart.imagenUrl"
+                  [alt]="productoCart.nombre"
+                />
+                <div class="flex flex-col justify-between p-4 leading-normal">
+                  <h5 class="mb-2 text-lg font-bold tracking-tight text-black">
+                    {{ productoCart.nombre }}
+                  </h5>
+                  <p class="mb-3 text-base font-semibold text-amber-500">
+                    S/.{{ productoCart.precio }}.00
+                  </p>
+                  <div class="flex justify-evenly items-center leading-normal">
+                    <button
+                      class="opacity-70 text-black hover:cursor-pointer hover:opacity-100 transition-[opacity] duration-200"
+                      (click)="agregarProducto(productoCart)"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="size-6"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                    <span
+                      id="contadorproductos"
+                      class="py-[0.1em] px-[0.5em] text-base text-[#000] bg-white rounded-[1em]"
+                      >{{ productoCart.cantidad }}</span
+                    >
+                    <button
+                      class="opacity-70 text-black hover:cursor-pointer hover:opacity-100 transition-[opacity] duration-200"
+                      (click)="eliminarProducto(productoCart.idProducto)"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="size-6"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
+      <div class="text-center">
+        <a
+          type="button"
+          data-drawer-hide="drawer-navigation"
+          aria-controls="drawer-navigation"
+          routerLink="/carrito"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+        >
+          Ver Carrito
+      </a>
+      </div>
+    </div>
+
+    <section class="my-16">
+      @for(category of productsResult; track category.nombre){
+      <h2 class="text-3xl text-black font-bold my-[1em]">{{ category.nombre }}</h2>
+      <div class="grid grid-cols-2 gap-5">
+        @for (product of category.productos; track $index) {
+        <app-card-product [productoAgregado]="product"></app-card-product>
+        }
+      </div>
+      }
+    </section>
+  </div>
+</main>
+<app-footer></app-footer>

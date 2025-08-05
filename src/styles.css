@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+
+@import "flatpickr/dist/themes/dark";
+
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+@theme {
+  --color-bgcolorff: #f5e1c3;
+  --font-IndieFlower: 'Indie Flower';
+}
+
+@utility downScroll {
+  @apply !opacity-0 !top-[-150px]
+}

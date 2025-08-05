@@ -1,0 +1,209 @@
+<app-nav></app-nav>
+<section class="py-40 antialiased bg-[#e9eeee]">
+  <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+    <h2 class="text-2xl font-semibold text-gray-900 sm:text-2xl">
+      Carrito de compras
+    </h2>
+
+    <div class="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
+      <div class="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
+        <div class="space-y-6">
+          <div
+            class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm md:p-6"
+          >
+            @if (productsCart.length<=0) {
+            <p class="text-gray-600 text-xl text-center">
+              Tu carrito está vacio.
+            </p>
+            } @else { @for (productCart of productsCart; track $index) {
+            <div
+              class="space-y-4 my-3 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0"
+            >
+              <div class="shrink-0 md:order-1">
+                <img
+                  class="h-20 w-20 s"
+                  [src]="productCart.imagenUrl"
+                  [alt]="productCart.nombre"
+                />
+              </div>
+
+              <div
+                class="flex items-center justify-between md:order-3 md:justify-end"
+              >
+                <div class="flex items-center">
+                  <span
+                    id="counter-input"
+                    data-input-counter
+                    class="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-bold text-gray-900 focus:outline-none focus:ring-0"
+                    >{{ productCart.cantidad }}</span
+                  >
+                </div>
+                <div class="text-end md:order-4 md:w-32">
+                  <p class="text-base font-bold text-gray-900">
+                    S/ {{ productCart.precio }}.00
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md"
+              >
+                <div class="text-base font-medium text-gray-900">
+                  {{ productCart.nombre }}
+                </div>
+              </div>
+            </div>
+            } }
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
+        <div
+          class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-smsm:p-6"
+        >
+          <p class="text-xl font-semibold text-gray-900">Método de compra</p>
+          <div class="flex rounded-md shadow-xs" role="group">
+            <button
+              type="button"
+              (click)="elegirTipoEntrega('delivery')"
+              class="flex-1 px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 hover:cursor-pointer"
+            >
+              Delivery
+            </button>
+            <button
+              type="button"
+              (click)="elegirTipoEntrega('retirar')"
+              class="flex-1 px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 hover:cursor-pointer"
+            >
+              Retirar
+            </button>
+          </div>
+
+          <div class="space-y-4">
+            <div class="space-y-2">
+              @if (tipoEntrega === 'delivery') {
+              <label
+                for="direccion"
+                class="block mb-2 text-sm font-medium text-gray-900"
+                >Dirección de entrega</label
+              >
+              <input
+                type="text"
+                id="direccion"
+                name="direccion"
+                [(ngModel)]="direccion"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Ingresa tu dirección"
+              />
+              } @else {
+              <label
+                for="countries"
+                class="block mb-2 text-sm font-medium text-gray-900"
+                >Elige una sucursal</label
+              >
+              <select
+                id="countries"
+                name="sucursal"
+                [(ngModel)]="sucursal"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              >
+                <option value="Pueblo Libre">Pueblo Libre</option>
+                <option value="Miraflores">Miraflores</option>
+                <option value="San Miguel">San Miguel</option>
+                <option value="La Molina">La Molina</option>
+                <option value="San Isidro">San Isidro</option>
+              </select>
+              }
+            </div>
+          </div>
+        </div>
+        <div
+          class="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-smsm:p-6"
+        >
+          <p class="text-xl font-semibold text-gray-900">
+            Resumen de la compra
+          </p>
+
+          <div class="space-y-4">
+            <div class="space-y-2">
+              <dl class="flex items-center justify-between gap-4">
+                <dt class="text-base font-normal text-gray-500">Total</dt>
+                <dd class="text-base font-medium text-gray-900">
+                  S/ {{ totalPrecio }}.00
+                </dd>
+              </dl>
+
+              <dl class="flex items-center justify-between gap-4">
+                <dt class="text-base font-normal text-gray-500">Delivery</dt>
+                <dd class="text-base font-medium">S/ {{ delivery }}.00</dd>
+              </dl>
+
+              <dl class="flex items-center justify-between gap-4">
+                <dt class="text-base font-normal text-gray-500">IGV</dt>
+                <dd class="text-base font-medium text-gray-900">
+                  S/ {{ igv }}
+                </dd>
+              </dl>
+            </div>
+
+            <dl
+              class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2"
+            >
+              <dt class="text-base font-bold text-gray-900">Subtotal</dt>
+              <dd class="text-base font-bold text-gray-900">
+                S/ {{ subtotal }}
+              </dd>
+            </dl>
+          </div>
+          @if (productsCart.length<=0) {
+          <button
+            class="block w-full text-white bg-blue-700 opacity-50 hover:cursor-not-allowed focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm my-2 px-5 py-2.5 text-center"
+            type="button"
+            disabled
+          >
+            Proceder a pagar
+          </button>
+
+          } @else {
+          <app-payment-form
+            [delivery]="delivery"
+            [igv]="igv"
+            [subtotal]="subtotal"
+            [totalPrecio]="totalPrecio"
+            [tipoEntrega]="tipoEntrega"
+            [direccion]="direccion"
+            [sucursal]="sucursal"
+          ></app-payment-form>
+          }
+
+          <div class="flex items-center justify-center gap-2">
+            <span class="text-sm font-normal text-gray-500"> o </span>
+            <a
+              routerLink="/tienda"
+              class="inline-flex items-center gap-2 text-sm font-medium text-gray-700 hover:underline"
+            >
+              Continuar comprando
+              <svg
+                class="h-5 w-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 12H5m14 0-4 4m4-4-4-4"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>
